@@ -1,0 +1,22 @@
+<div>
+    <div>
+        <p>OTYPES ARRAY</p>
+        <ul>
+            {{#each model as |otype|}}
+                <li>
+                    {{#link-to "otype" otype.id}}
+                        {{otype.name}}
+                    {{/link-to}}
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+    <div>
+        <p>CURRENT OTYPE</p>
+        {{outlet}}
+    </div>
+</div>
+
+
+
+

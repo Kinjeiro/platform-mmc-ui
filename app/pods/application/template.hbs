@@ -1,0 +1,21 @@
+<div {{bind-attr class="isLoginRoute:app-wrapper-login:app-wrapper"}}>
+    {{#unless isLoginRoute}}
+        <div class="header">
+            <!--The "partial" helper renders another template without changing the template context:-->
+            {{partial "header"}}
+        </div>
+    {{/unless}}
+
+    <div class="content">
+    <!--placeholder for inner route component-->
+    {{outlet}}
+    </div>
+
+
+    {{#unless isLoginRoute}}
+        <div class="footer">
+            {{partial "footer"}}
+        </div>
+    {{/unless}}
+
+</div>
