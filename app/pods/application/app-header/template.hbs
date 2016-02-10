@@ -1,0 +1,62 @@
+<header class="mmc-header mdl-layout__header mdl-layout__header--scroll">
+    <div class="mdl-layout__header-row">
+        <!-- Title -->
+        {{link-to "Platform MMC" "home" tagName="span" class="mdl-layout-title"}}
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+
+    </div>
+
+    <div class="mdl-layout__header-row">
+        {{#if pageTitle}}
+            <nav class="mdl-navigation">
+                <span class="active mdl-navigation__link">{{pageTitle}}</span>
+            </nav>
+        {{/if}}
+
+        <div class="mdl-layout-spacer"></div>
+
+        <!--Search-->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+            <label class="mdl-button mdl-js-button mdl-button--icon"
+                   for="waterfall-exp">
+                <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+                <input class="mdl-textfield__input" type="text" name="sample"
+                       id="waterfall-exp">
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <!--<nav class="mdl-navigation">-->
+            <!--<a class="mdl-navigation__link" href="">Login</a>-->
+            <!--<a class="mdl-navigation__link" href="">Logout</a>-->
+        <!--</nav>-->
+
+        {{#if session.isAuthenticated}}
+            <a {{action 'invalidateSession'}} class="mdl-navigation__link" href="">Logout</a>
+        {{else}}
+            {{#link-to 'login' class='mdl-navigation__link'}}Login{{/link-to}}
+        {{/if}}
+    </div>
+
+    <!--<div>-->
+        <!--&lt;!&ndash;//todo @ANKU - bread-crumbs &ndash;&gt;-->
+        <!--Navigation > Path > To > Object > Type-->
+        <!--<div class="mdl-layout-spacer"></div>-->
+        <!--&lt;!&ndash;navigation path - https://github.com/chrisfarber/ember-breadcrumbs&ndash;&gt;-->
+        <!--{{!-- {{bread-crumbs}} --}}-->
+    <!--</div>-->
+</header>
+
+<div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Menu</span>
+    <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="">Menu Item 1</a>
+        <a class="mdl-navigation__link" href="">Menu Item 2</a>
+        <a class="mdl-navigation__link" href="">Menu Item 3</a>
+        <a class="mdl-navigation__link" href="">Menu Item 4</a>
+    </nav>
+</div>

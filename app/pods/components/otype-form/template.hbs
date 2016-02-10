@@ -1,0 +1,139 @@
+<!--
+otype-form component
+
+Properties:
+    otype
+    isEdit
+    action
+-->
+
+{{!--
+    //@guide - Можно использовать хелперы внутри параметров для компонентных пропертей
+    Handlebars now supports subexpressions
+    http://stackoverflow.com/questions/14781916/is-it-possible-with-handlebars-to-nest-helpers-inside-the-options-hash
+    Вот пример как можно объекдинить статическую строку с динамическим аттрибутом
+    {{#mdl-card title=(concat 'Объектный тип ' otype.name)}}
+--}}
+{{#mdl-card title=(concat 'Объектный тип "' otype.name '"')}}
+    <div class="mdl-card__supporting-text">
+
+        <form {{action 'submit' on='submit'}}>
+            <div>
+                <label for="">ID</label>
+                <span>{{otype.id}}</span>
+            </div>
+            <div>
+                <label for="">PARENT</label>
+                <span>{{otype.parent}}</span>
+            </div>
+
+
+            {{!--
+            ==== 1 СПОСОБ ====
+            {{input value=otype.name}}
+
+            ==== 2 СПОСОБ ====
+            //@guide - вмеcто компонента по-умолчанию встроенного в ember {{input}} (который работает на two-way data-binding) в рамках идеологии DDAU (Data Down Action Up, эмберовский flux) мы будем использовть one-way-binding компоненты -->
+            http://emberobserver.com/addons/ember-one-way-controls
+
+                {{one-way-input
+                    value=otype.name
+                    update=(action (mut otype.name))
+                }}
+            события обновления "update" вызывает темплейт helper "action" который запускает action
+            в данном случает срабатывает внутренний action "mut" со значением <поле>
+            mut (от слова mutable) - позволяет менять значение переменных, но на на уровне темплейта, а в недрах контроллера
+
+            можно использовать и обычный нативный инпут
+                <input
+                  value={{currentValue}}
+                  oninput={{action (mut currentValue) value="target.value"}}
+                >
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{one-way-input
+                    value=otype.name
+                    update=(action (mut otype.name))
+
+                    disabled=isView
+                    id="otypeName"
+                    class="mdl-textfield__input"
+                    pattern="-?[0-9]*(\.[0-9]+)?"
+                }}
+                <label class="mdl-textfield__label" for="otypeName">Название</label>
+                <span class="mdl-textfield__error">Значение должно быть числовым</span>
+            </div>
+
+            ==== 3 СПОСОБ ====
+            так как мы используем Material Design Lite (MDL), то будем использовать их конмоненты (для поддержки динамических регистрации компонента при перерендеринге контрола)
+            --}}
+
+            <!--pattern="\s+"-->
+            <!--errorMessage="Поле не должно быть пустым"-->
+            <!--//todo @ANKU @BUG_OUT @ember-mdl - mdl создали контрол, но урезали функционал хелпера input, убрали required, min, max и кучу еще аттрибутов - нужно свой переписать, унаследовавшись от mdl-->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{mdl-textfield
+                    label="Название"
+                    value=otype.name
+                    disabled=isView}}
+            </div>
+
+
+            {{!--
+            <div class="mmc-otype-form-cmp-buttons">
+                {{#if isView}}
+                    {{#link-to "otypes.new" otype}}Создать Потомка{{/link-to}}
+                    {{#link-to "otypes.edit" otype}}Редактировать{{/link-to}}
+                {{else}}
+
+                    <button type="submit">
+                        {{#if isTemp}} Создать {{else}} Обновить {{/if}}
+                    </button>
+                    {{#if hasCancel}}
+                        <button {{action 'cancel'}}>
+                            Отмена
+                        </button>
+                    {{/if}}
+                {{/if}}
+
+                {{#unless isTemp}}
+                    {{#if hasDelete}}
+                        <button {{action 'deleteOtype'}}>
+                            Удалить
+                        </button>
+                    {{/if}}
+                {{/unless}}
+            </div>
+            --}}
+
+            <div class="mmc-otype-form-cmp-buttons">
+                {{#if isView}}
+                    {{#link-to "otypes.new" otype tagName="span"}}
+                        <!--//todo @ANKU - сделать новый компонент унаследованныйот от кнопки и добавить tooltipText аттрибут -->
+                        {{mdl-button icon="add" isFloating=true isColored=true isMiniFab=false }}
+                    {{/link-to}}
+                    {{#link-to "otypes.edit" otype tagName="span"}}
+                        {{mdl-button icon="create" isFloating=true isColored=true isMiniFab=true }}
+                    {{/link-to}}
+                {{else}}
+                    {{mdl-button type="submit" icon="check" isFloating=true isColored=true isMiniFab=false }}
+                    {{#if hasCancel}}
+                        {{mdl-button action="cancel" icon="clear" isFloating=true isColored=true isMiniFab=true }}
+                    {{/if}}
+                {{/if}}
+
+                {{#unless isTemp}}
+                    {{#if hasDelete}}
+                        {{!--
+                        <button {{action 'deleteOtype'}} class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
+                            <i class="material-icons">delete</i>
+                        </button>
+                        --}}
+                        {{mdl-button action="deleteOtype" icon="delete" isFloating=true isColored=true isMiniFab=true }}
+                    {{/if}}
+                {{/unless}}
+            </div>
+        </form>
+
+    </div>
+{{/mdl-card}}

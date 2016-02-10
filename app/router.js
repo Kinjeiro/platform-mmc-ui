@@ -2,7 +2,7 @@ import Ember        from 'ember';
 import config       from './config/environment';
 
 const Router = Ember.Router.extend({
-	location: config.locationType
+    location: config.locationType
 });
 
 //todo @ANKU @BUG_OUT @Ember - При удалении этих папок падает ошибка компиляции
@@ -11,11 +11,16 @@ const Router = Ember.Router.extend({
 //- видимо не предусмотрели что может быть pod структура, поэтому приходится хранить там файлы gitkeep чтобы гит пустые папки не удалил
 
 Router.map(function () {
-	this.route('otypes', {path: '/otypes'}, () => {
-		this.route('otype', {path: '/otypes/:otype_id'});
-	});
-
 	this.route('login');
+
+	this.route('home', {path: '/'});
+
+    //resetNamespace: true
+    this.route('otypes', function() {
+	    this.route('otype', {path: ':otype_id'});
+	    this.route('new',   {path: ':parent_otype_id/new'});
+        this.route('edit',  {path: ':otype_id/edit'});
+    });
 });
 
 export default Router;

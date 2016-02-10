@@ -1,0 +1,50 @@
+<!--
+otype-form component
+
+Properties:
+    otypes
+    treeData
+-->
+
+
+
+<!--Не подходит, так как при измении объектных типов - нужно обновлять данные а это много и не возможно слушать сразу все поля в объектах массива-->
+<!--Поэтому нужно дерево на ember data модели-->
+
+<!--eventDidSelectNode="actionOTypesSelect"-->
+<!--eventDidBecomeReady="actionOTypesReady"-->
+
+<!--https://www.npmjs.com/package/ember-cli-jstree-->
+<!--https://www.jstree.com/api/#-->
+
+{{ember-jstree
+    data=treeData
+    actionReceiver=jstreeActionReceiver
+
+    eventDidSelectNode='selectTreeNode'
+
+    plugins='state,wholerow'
+    stateOptions=stateOptions
+}}
+
+
+
+<!--state ( stateOptions=stateOptions)- сохраняет открытые \ закрытые в сессии-->
+<!--wholerow плагин - выделение по всей строке-->
+<!--types плагин (typesOptions=typesOptions) - автоматические иконки для типов-->
+<!--"types" : {-->
+    <!--"default" : {-->
+        <!--"icon" : "glyphicon glyphicon-flash"-->
+    <!--},-->
+    <!--"demo" : {-->
+        <!--"icon" : "glyphicon glyphicon-ok"-->
+    <!--}-->
+<!--},-->
+
+
+{{!--
+На Ember 2.0 этот плагин не работает
+http://indexiatech.github.io/ember-idx-tree/simple
+
+{{em-tree model=model title='name'}}
+--}}

@@ -1,21 +1,22 @@
-<div {{bind-attr class="isLoginRoute:app-wrapper-login:app-wrapper"}}>
-    {{#unless isLoginRoute}}
-        <div class="header">
-            <!--The "partial" helper renders another template without changing the template context:-->
-            {{partial "header"}}
-        </div>
-    {{/unless}}
+<div class="mmc-platform mdl-layout__container">
+    {{!--
+    {{bind-attr class="isLoginRoute:mmc-login-page:app-wrapper"}}
+    --}}
+    <div class="mdl-layout mdl-js-layout {{if isLoginRoute 'mmc-login-page'}}">
+        {{#unless isLoginRoute}}
+            {{!--
+            //@guide - The "partial" helper renders another template without changing the template context:
+            --}}
+            {{partial "application/app-header"}}
+        {{/unless}}
 
-    <div class="content">
-    <!--placeholder for inner route component-->
-    {{outlet}}
+        <main class="mmc-content mdl-layout__content">
+            <!--placeholder for inner route component-->
+            {{outlet}}
+        </main>
+
+        {{#unless isLoginRoute}}
+            {{partial "application/app-footer"}}
+        {{/unless}}
     </div>
-
-
-    {{#unless isLoginRoute}}
-        <div class="footer">
-            {{partial "footer"}}
-        </div>
-    {{/unless}}
-
 </div>

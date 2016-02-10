@@ -1,22 +1,10 @@
-<div>
-    <div>
-        <p>OTYPES ARRAY</p>
-        <ul>
-            {{#each model as |otype|}}
-                <li>
-                    {{#link-to "otype" otype.id}}
-                        {{otype.name}}
-                    {{/link-to}}
-                </li>
-            {{/each}}
-        </ul>
+<div class="mmc-otypes-tree-container mdl-shadow--4dp">
+    <div class="mmc-otypes-tree">
+        {{otypes-tree otypes=otypes onSelectOtypeAction='selectOtype'}}
     </div>
-    <div>
-        <p>CURRENT OTYPE</p>
+</div>
+<div class="mmc-otype">
+    <div class="mdl-grid">
         {{outlet}}
     </div>
 </div>
-
-
-
-

@@ -1,3 +1,4 @@
-{{login-form onLogin='login'}}
-
-{{outlet}}
+<!--authenticateSuccess - это экшен из родительского роута - applicetion/route.js -->
+{{login/login-form
+    onLogin="authenticateSuccess"
+}}

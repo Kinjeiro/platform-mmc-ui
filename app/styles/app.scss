@@ -1,0 +1,187 @@
+@import "_color-definitions";
+
+$color-primary: $palette-teal-500;
+//$color-accent: $palette-pink-A200;
+//$color-accent: "0,0,100";
+
+@import "material-design-lite";
+
+.mmc-login-page {
+  .mdl-card {
+    margin: 100px auto 0 auto;
+  }
+}
+
+
+
+
+//необходимо у fab кнопок убрать прозрачность, так как они стоят на пересечении линии блоков
+$button-primary-color: unquote("rgba(#{$palette-grey-200}, 1)");
+$button-hover-color: $button-primary-color;
+$button-active-color: unquote("rgba(#{$palette-grey-300}, 1)");
+$button-focus-color: unquote("rgba(#{$palette-grey-400}, 1)");
+.mdl-button--fab {
+  background: $button-primary-color;
+
+
+  &:hover {
+    background-color: $button-hover-color;
+  }
+  &:focus:not(:active) {
+    background-color: $button-focus-color;
+  }
+  &:active {
+    background-color: $button-active-color;
+  }
+}
+
+
+@media screen and (max-width: 1024px) {
+  .mdl-layout__header {
+    display: inherit;
+  }
+}
+
+.mmc-platform .mdl-layout__header,
+.mmc-platform .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: white;
+}
+
+.mmc-header .mdl-layout-title {
+  cursor: pointer;
+}
+
+.mdl-navigation .active.mdl-navigation__link {
+  border-bottom: 4px solid #18ffff;
+  height: $layout-mobile-header-height - 4;
+}
+
+//.mmc-content.mdl-layout__content {
+//  //убираем фриз хедера
+//  overflow: visible;
+//}
+
+.mmc-bread-crumbs {
+  //background: #FFF;
+  //color: unquote("rgb(#{$color-primary})");
+}
+
+
+.mmc-content {
+  position: relative;
+  background: #FAFAFA;
+}
+
+
+.mmc-home-content.mdl-card {
+  width: 512px;
+  margin: 60px auto;
+}
+.mmc-home-content > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('../images/home-panel1_2.jpg') center / cover;
+}
+.mmc-home-content > .mdl-card__menu {
+  color: #fff;
+}
+
+
+//
+//.mdl-components .mdl-components__nav {
+//  display: inline-block;
+//  background: #fff;
+//  width: 250px;
+//  box-sizing: border-box;
+//  padding: 24px 0;
+//  -webkit-flex-shrink: 0;
+//  -ms-flex-negative: 0;
+//  flex-shrink: 0;
+//  z-index: 1;
+//}
+//.mdl-components .mdl-components__pages {
+//  display: inline-block;
+//  -webkit-box-flex: 1;
+//  -webkit-flex-grow: 1;
+//  -ms-flex-positive: 1;
+//  flex-grow: 1;
+//  padding-bottom: 120px;
+//}
+
+
+//$layout-header-mobile-row-height: 56px;
+//$layout-header-desktop-row-height: 64px;
+//todo @ANKU - баг почему считается не через sass высота декстоп стороки хедера, а через css, поэтому неправильно расчитыватся
+//$mmc-header-row-height: $layout-header-desktop-row-height;
+$mmc-header-row-height: $layout-header-mobile-row-height;
+//у нас две строчки в хедер
+$mmc-header-height: $mmc-header-row-height * 2;
+
+//см
+//.mdl-grid {
+//  padding: $grid-tablet-margin - ($grid-tablet-gutter / 2);
+//}
+$mmc-margin-number: 8px;
+
+$mmc-otypes-tree-width: 300px;
+
+.mmc-otypes-tree-container {
+  position: fixed;
+  height: 100%;
+  width: $mmc-otypes-tree-width;
+  bottom: 0;
+  //todo @ANKU - бага в том, что верхняя часть вертикального скроллинга не показывается так как это fixed
+  overflow: auto;
+  background: #fff;
+
+  .mmc-otypes-tree {
+    margin-top: $mmc-header-height + $mmc-margin-number;
+
+  }
+}
+
+
+
+
+$mmc-otype-form-cmp-button-width:56px;
+
+.mmc-otype {
+  margin-left: $mmc-otypes-tree-width;
+  padding-left: $mmc-otype-form-cmp-button-width / 2;
+
+
+  .mdl-card {
+    //чтобы кнопки могли прикрепится к дерево объектных типов, мы поставили у главного родителя relative. mdl-card тоже имеет relative, поэтому перебивает кнопки
+    position: static;
+    width: 100%;
+  }
+  .mmc-otype-form-cmp-buttons {
+    position: fixed;
+    top: $mmc-header-height + $mmc-margin-number;
+    left: $mmc-otypes-tree-width - $mmc-otype-form-cmp-button-width / 2;
+    width: $mmc-otype-form-cmp-button-width;
+
+    .mdl-button {
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+  }
+
+
+  .mdl-textfield.is-disabled {
+    .mdl-textfield__input {
+      background-color: inherit;
+      //border-bottom: 1px solid $input-text-bottom-border-color;
+      //color: $input-text-label-color;
+      color: inherit;
+    }
+
+    .mdl-textfield__label {
+      //color: $input-text-label-color;
+      color: inherit;
+    }
+  }
+}
+
